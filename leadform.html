@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact Us — Safebox Technologies</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --azure: #2f5972;
+    --azure-hover: #264a60;
+    --black: #0A0A0A;
+    --form-bg: #F7F9FB;
+    --input-border: #D8DDE3;
+    --input-bg: #FFFFFF;
+    --label: #6B7280;
+    --body-text: #1A1A1A;
+    --heading: #111827;
+    --muted: #9CA3AF;
+    --error: #DC2626;
+  }
+
+  body {
+    background: #161616;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  .page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 900px;
+    width: 100%;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+
+  .sidebar {
+    background: var(--black);
+    border-left: 4px solid var(--azure);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: 80px; left: -70px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 3rem;
+  }
+
+  .logo-icon {
+    width: 32px; height: 32px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .logo-icon svg { width: 16px; height: 16px; }
+
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+  }
+
+  .sidebar-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #FFFFFF;
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-heading span { color: var(--azure); font-style: italic; }
+
+  .sidebar-sub {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .trust-items { display: flex; flex-direction: column; gap: 0.9rem; }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .trust-dot {
+    width: 5px; height: 5px;
+    background: var(--azure);
+    flex-shrink: 0;
+  }
+
+  .form-side {
+    background: var(--form-bg);
+    padding: 3rem 2.5rem;
+  }
+
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 0.3rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 0.9rem; }
+
+  label {
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--label);
+    font-weight: 500;
+  }
+
+  input, select, textarea {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 2px;
+    color: var(--body-text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    padding: 0.6rem 0.85rem;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    width: 100%;
+    appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--azure);
+    box-shadow: 0 0 0 3px rgba(47,89,114,0.12);
+  }
+
+  input::placeholder, textarea::placeholder { color: #C4C9D0; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B7280' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  select option { background: #fff; color: var(--body-text); }
+
+  textarea { resize: none; height: 80px; }
+
+  .field-error { font-size: 0.7rem; color: var(--error); margin-top: 2px; display: none; }
+  .field.invalid .field-error { display: block; }
+  .field.invalid input, .field.invalid select, .field.invalid textarea {
+    border-color: var(--error);
+    background: #FEF2F2;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--azure);
+    border: none;
+    color: #FFFFFF;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    padding: 0.85rem;
+    cursor: pointer;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    transition: background 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .submit-btn:hover { background: var(--azure-hover); }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: #FFFFFF;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .success-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    gap: 1rem;
+    padding: 2rem 0;
+  }
+
+  .success-icon {
+    width: 48px; height: 48px;
+    border: 1.5px solid var(--azure);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--heading);
+  }
+
+  .success-msg { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  .error-banner {
+    display: none;
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 2px;
+    padding: 0.7rem 1rem;
+    font-size: 0.8rem;
+    color: var(--error);
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .page { grid-template-columns: 1fr; }
+    .sidebar { padding: 2rem 1.5rem; border-left: 4px solid var(--azure); }
+    .form-side { padding: 2rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .sidebar-heading { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="sidebar">
+    <div>
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 1L2 4V8C2 11.3 4.6 14.4 8 15C11.4 14.4 14 11.3 14 8V4L8 1Z" stroke="#FFFFFF" stroke-width="1.2" fill="none"/>
+            <path d="M5.5 8L7 9.5L10.5 6" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="logo-text">SAFEBOX TECHNOLOGIES</span>
+      </div>
+
+      <h1 class="sidebar-heading">Secure your <span>digital perimeter.</span></h1>
+      <p class="sidebar-sub">Our team of certified security experts is ready to assess your infrastructure and deliver tailored solutions for your business.</p>
+
+      <div class="trust-items">
+        <div class="trust-item"><span class="trust-dot"></span> Penetration Testing & Red Team</div>
+        <div class="trust-item"><span class="trust-dot"></span> Security Audits & Compliance</div>
+        <div class="trust-item"><span class="trust-dot"></span> Managed Security Services</div>
+        <div class="trust-item"><span class="trust-dot"></span> Incident Response & Recovery</div>
+        <div class="trust-item"><span class="trust-dot"></span> ISO 27001 & NIST Advisory</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.72rem; color: rgba(255,255,255,0.25); margin-top: 2rem;">Dubai, UAE &nbsp;·&nbsp; Response within 24 hours</p>
+  </div>
+
+  <div class="form-side">
+    <div id="form-wrap">
+      <h2 class="form-title">Get in Touch</h2>
+      <p class="form-subtitle">Fill out the form and our team will reach out shortly.</p>
+
+      <div class="error-banner" id="error-banner"></div>
+
+      <form id="lead-form" novalidate>
+        <div class="form-row">
+          <div class="field" id="f-name">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="First_Name" placeholder="Ahmed" autocomplete="given-name"/>
+            <span class="field-error">Required</span>
+          </div>
+          <div class="field" id="f-lname">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="Last_Name" placeholder="Al Rashid" autocomplete="family-name"/>
+            <span class="field-error">Required</span>
+          </div>
+        </div>
+
+        <div class="field" id="f-company">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="Company" placeholder="Your Company Name"/>
+          <span class="field-error">Required</span>
+        </div>
+
+        <div class="form-row">
+          <div class="field" id="f-email">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="Email" placeholder="you@company.com" autocomplete="email"/>
+            <span class="field-error">Valid email required</span>
+          </div>
+          <div class="field" id="f-phone">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="Phone" placeholder="+971 50 000 0000" autocomplete="tel"/>
+            <span class="field-error">Required</span>
+          </div>
+        </div>
+
+        <div class="field" id="f-service">
+          <label for="service">Service Interest</label>
+          <select id="service" name="Lead_Source">
+            <option value="" disabled selected>Select a service…</option>
+            <option value="Penetration Testing">Penetration Testing</option>
+            <option value="Security Audit">Security Audit</option>
+            <option value="Managed Security">Managed Security Services</option>
+            <option value="Incident Response">Incident Response</option>
+            <option value="Compliance Advisory">Compliance Advisory</option>
+            <option value="Other">Other / General Inquiry</option>
+          </select>
+          <span class="field-error">Please select a service</span>
+        </div>
+
+        <div class="field">
+          <label for="message">Message <span style="color:#C4C9D0;text-transform:none;letter-spacing:0">(optional)</span></label>
+          <textarea id="message" name="Description" placeholder="Briefly describe your security needs…"></textarea>
+        </div>
+
+        <button class="submit-btn" type="submit" id="submit-btn">
+          <span id="btn-text">Submit Inquiry</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+      </form>
+    </div>
+
+    <div class="success-state" id="success-state">
+      <div class="success-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M4 11L9 16L18 6" stroke="#2f5972" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="success-title">Message Received</h3>
+      <p class="success-msg">Thank you for reaching out.<br/>Our team will contact you within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const BACKEND_URL = 'https://lead-form-idly.onrender.com/';
+
+  const form = document.getElementById('lead-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const spinner = document.getElementById('spinner');
+  const btnText = document.getElementById('btn-text');
+  const errorBanner = document.getElementById('error-banner');
+
+  function validateField(id, validator) {
+    const wrapper = document.getElementById('f-' + id);
+    if (!wrapper) return true;
+    const input = wrapper.querySelector('input,select,textarea');
+    const valid = validator(input.value.trim());
+    wrapper.classList.toggle('invalid', !valid);
+    return valid;
+  }
+
+  function showError(msg) {
+    errorBanner.textContent = msg;
+    errorBanner.style.display = 'block';
+  }
+
+  function clearError() { errorBanner.style.display = 'none'; }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearError();
+
+    const checks = [
+      validateField('name', v => v.length > 0),
+      validateField('lname', v => v.length > 0),
+      validateField('company', v => v.length > 0),
+      validateField('email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)),
+      validateField('phone', v => v.length > 5),
+      validateField('service', v => v.length > 0),
+    ];
+
+    if (checks.includes(false)) return;
+
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    spinner.style.display = 'block';
+
+    const data = {};
+    new FormData(form).forEach((val, key) => { data[key] = val; });
+
+    try {
+      const res = await fetch(BACKEND_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (!res.ok) throw new Error('Server error: ' + res.status);
+
+      document.getElementById('form-wrap').style.display = 'none';
+      document.getElementById('success-state').style.display = 'flex';
+    } catch (err) {
+      showError('Something went wrong. Please try again or email us directly.');
+      submitBtn.disabled = false;
+      btnText.style.display = 'inline';
+      spinner.style.display = 'none';
+    }
+  });
+
+  form.querySelectorAll('input, select, textarea').forEach(el => {
+    el.addEventListener('input', () => {
+      const wrapper = el.closest('.field');
+      if (wrapper) wrapper.classList.remove('invalid');
+    });
+  });
+</script>
+</body>
+</html>
